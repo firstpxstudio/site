@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <!-- Otimização Mobile: Impede zoom indesejado ao tocar em botões -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FirstpX Studio | Nossos Próprios Apps Android</title>
+    <meta name="description" content="FirstpX Studio: Estúdio de desenvolvimento independente criando aplicativos Android com foco em performance, design minimalista e privacidade.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#000000',
+                            dark: '#0a0a0a',
+                            gray: '#111111',
+                            cyan: '#00e5ff',
+                            blue: '#0055ff',
+                            green: '#00e676'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-brand': 'linear-gradient(135deg, #00e676 0%, #00e5ff 50%, #0055ff 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000000; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+
+        /* Animações e Efeitos */
+        .glow-hover { transition: all 0.3s ease; }
+        .glow-hover:hover {
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.15);
+            border-color: rgba(0, 229, 255, 0.5);
+        }
+        
+        /* Ajuste fino para mobile */
+        @media (max-width: 640px) {
+            .mobile-text-balance { text-wrap: balance; }
+        }
+    </style>
+
+    <script>
+        function firstPxApp() {
+            return {
+                mobileMenu: false,
+                
+                // =========================================================
+                // LISTA DE APLICATIVOS (PREENCHA MANUALMENTE AQUI)
+                // =========================================================
+                apps: [
+                    {
+                        title: 'RecordX',
+                        description: 'Um gravador de tela profissional feito para os Criadores de Conteúdo. Capaz até de substituir uma placa de captura de vídeo.',
+                        image: 'RecordX.jpg', 
+                        link: '🪙CryptoX Ticker 1.0.html' 
+                    },               
+                ]
+            }
+        }
+    </script>
+</head>
+
+<body class="antialiased selection:bg-brand-cyan selection:text-black flex flex-col min-h-screen" x-data="firstPxApp()">
+
+    <!-- Header Otimizado para Mobile -->
+    <header class="fixed w-full top-0 z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="block group py-2">
+                        <img src="logo.jpg" alt="FirstpX Studio" class="h-8 md:h-10 transition-transform duration-300 group-hover:scale-105 rounded-md" onerror="this.style.display='none'">
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+                    <a href="#sobre" class="text-sm font-semibold text-gray-400 hover:text-white transition-colors">Início</a>
+                    <a href="#apps" class="text-sm font-semibold text-gray-400 hover:text-white transition-colors">Catálogo</a>
+                    <a href="termos.html" class="text-sm font-semibold text-gray-400 hover:text-white transition-colors">Termos</a>
+                    <a href="privacidade.html" class="text-sm font-semibold text-gray-400 hover:text-white transition-colors">Privacidade</a>
+                    
+                    <a href="#apps" class="px-6 py-2.5 text-sm font-bold rounded-full border border-brand-cyan/50 text-white bg-brand-cyan/10 hover:bg-brand-cyan/20 transition-all shadow-[0_0_15px_rgba(0,229,255,0.15)] flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-brand-cyan"></i> Explorar Apps
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button - Maior área de toque -->
+                <div class="md:hidden flex items-center">
+                    <button @click="mobileMenu = !mobileMenu" class="text-gray-400 hover:text-white focus:outline-none p-3 -mr-3 transition-colors">
+                        <i class="fa-solid text-2xl" :class="mobileMenu ? 'fa-xmark' : 'fa-bars-staggered'"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div x-show="mobileMenu" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-4"
+             @click.away="mobileMenu = false"
+             class="md:hidden bg-brand-dark/95 backdrop-blur-xl border-b border-white/5 absolute w-full left-0 top-[64px] shadow-2xl">
+            <div class="px-5 py-6 space-y-4 flex flex-col">
+                <a href="#sobre" @click="mobileMenu = false" class="block text-lg font-bold text-gray-300 hover:text-white py-2">Início</a>
+                <a href="#apps" @click="mobileMenu = false" class="block text-lg font-bold text-gray-300 hover:text-white py-2 border-t border-white/5">Catálogo de Apps</a>
+                <a href="termos.html" @click="mobileMenu = false" class="block text-lg font-bold text-gray-300 hover:text-white py-2 border-t border-white/5">Termos de Uso</a>
+                <a href="privacidade.html" @click="mobileMenu = false" class="block text-lg font-bold text-gray-300 hover:text-white py-2 border-t border-white/5">Privacidade</a>
+                
+                <a href="#apps" @click="mobileMenu = false" class="mt-6 block w-full text-center px-5 py-4 text-sm font-bold rounded-xl border border-brand-cyan/50 text-brand-cyan bg-brand-cyan/10 active:bg-brand-cyan/20 transition-colors">
+                    Acessar Aplicativos <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section id="sobre" class="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex flex-col justify-center border-b border-white/5 min-h-[80vh] md:min-h-[85vh]">
+            <!-- Elementos de Glow de Fundo -->
+            <div class="absolute top-1/4 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-blue/10 rounded-full blur-[100px] md:blur-[150px] pointer-events-none transform -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-brand-green/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none transform translate-x-1/2 translate-y-1/2"></div>
+            
+            <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10 w-full">
+                <div class="max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-[10px] md:text-xs font-black text-gray-300 mb-6 md:mb-8 tracking-widest uppercase">
+                        <span class="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
+                        Estúdio de Software Independente
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter mb-4 md:mb-6 leading-[1.1] mobile-text-balance">
+                        Criamos o que faltava<br class="hidden sm:block">
+                        <span class="text-transparent bg-clip-text bg-gradient-brand">do nosso jeito.</span>
+                    </h1>
+                    
+                    <p class="mt-4 md:mt-6 text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl font-light leading-relaxed">
+                        A <strong class="text-white font-semibold">FirstpX Studio</strong> desenvolve e publica os próprios aplicativos para o Sistema Android. Foco absoluto em performance, design minimalista e privacidade total do usuário.
+                    </p>
+                    
+                    <div class="mt-10 md:mt-12 flex flex-col sm:flex-row gap-4">
+                        <a href="#apps" class="px-8 py-4 text-sm font-bold rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-brand-cyan/50 text-white transition-all flex items-center justify-center gap-3 group shadow-lg">
+                            Visualizar Vitrine 
+                            <i class="fa-solid fa-arrow-down text-brand-cyan group-hover:translate-y-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Grid Section -->
+        <section id="apps" class="py-16 md:py-24 bg-brand-black relative">
+            <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+                
+                <!-- Cabeçalho da Seção -->
+                <div class="mb-12 md:mb-16 border-b border-gray-900 pb-6 md:pb-8 md:flex md:justify-between md:items-end">
+                    <div>
+                        <h2 class="text-[10px] md:text-xs font-black text-brand-cyan tracking-widest uppercase mb-2 md:mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-code"></i> Para Android
+                        </h2>
+                        <h3 class="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">Nossos Apps</h3>
+                    </div>
+                    <div class="mt-4 md:mt-0 max-w-sm">
+                        <p class="text-xs sm:text-sm text-gray-500 md:text-right">A exclusividade esta aqui!</p>
+                    </div>
+                </div>
+                
+                <!-- GRID DOS APLICATIVOS -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+                    
+                    <template x-for="(app, index) in apps" :key="index">
+                        <!-- Card do App -->
+                        <div class="bg-brand-gray border border-gray-800 rounded-3xl p-5 md:p-6 relative overflow-hidden group flex flex-col min-h-[280px] md:min-h-[320px] glow-hover transform transition duration-300">
+                            
+                            <!-- Efeito de Luz -->
+                            <div class="absolute -top-16 -right-16 w-32 h-32 bg-brand-blue/10 rounded-full blur-3xl group-hover:bg-brand-cyan/10 transition-colors pointer-events-none"></div>
+
+                            <div class="flex flex-col h-full relative z-10">
+                                <!-- Ícone do App -->
+                                <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl border border-gray-700 mb-4 md:mb-5 overflow-hidden bg-brand-black shadow-lg flex-shrink-0">
+                                    <template x-if="app.image">
+                                        <!-- Fallback via JS para caso a imagem local não seja encontrada -->
+                                        <img :src="app.image" :alt="app.title" class="w-full h-full object-cover" 
+                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                    </template>
+                                    
+                                    <!-- Fallback Icon -->
+                                    <div class="w-full h-full flex items-center justify-center text-gray-600 bg-gray-900" x-show="!app.image" style="display: none;">
+                                        <i class="fa-solid fa-cubes text-xl md:text-2xl"></i>
+                                    </div>
+                                </div>
+                                
+                                <!-- Conteúdo Textual -->
+                                <h4 class="text-lg md:text-xl font-bold text-white mb-2 line-clamp-1" x-text="app.title"></h4>
+                                <p class="text-gray-400 text-xs md:text-sm leading-relaxed flex-1 mb-5 md:mb-6" x-text="app.description"></p>
+                                
+                                <!-- Botão de Acesso Dinâmico -->
+                                <a :href="app.link" class="mt-auto w-full py-3 md:py-3.5 rounded-xl border border-white/10 bg-black hover:bg-gray-900 active:bg-gray-800 transition-colors flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-300 hover:text-white group-hover:border-brand-cyan/40 shadow-sm">
+                                    Acessar App <i class="fa-solid fa-arrow-up-right-from-square text-brand-cyan ml-1"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#050505] py-10 md:py-12 border-t border-white/5 mt-auto">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
+            
+            <img src="logo.jpg" alt="FirstpX Studio Logo" class="h-6 md:h-8 opacity-40 hover:opacity-100 transition duration-300 mb-5 md:mb-6 grayscale hover:grayscale-0 rounded-sm" onerror="this.style.display='none'">
+            
+            <p class="text-[10px] md:text-xs text-gray-600 font-mono tracking-wide text-center">
+                Desenvolvendo o melhor dos dois mundos
+            </p>
+            <p class="text-[9px] md:text-[10px] text-gray-700 mt-2 text-center">
+                &copy; 2026 FirstpX Studio. Todos os direitos reservados.
+            </p>
+
+            <!-- Links de Rodapé Separados -->
+            <div class="mt-6 flex flex-wrap gap-4 items-center justify-center text-[10px] md:text-xs font-semibold">
+                <a href="termos.html" class="text-gray-500 hover:text-brand-cyan transition-colors border-b border-transparent hover:border-brand-cyan">
+                    Termos de Uso
+                </a>
+                <span class="text-gray-800 hidden sm:inline">&bull;</span>
+                <a href="privacidade.html" class="text-gray-500 hover:text-brand-cyan transition-colors border-b border-transparent hover:border-brand-cyan">
+                    Política de Privacidade
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
